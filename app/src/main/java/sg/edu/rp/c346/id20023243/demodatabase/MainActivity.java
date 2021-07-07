@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 DBHelper dbh = new DBHelper(MainActivity.this); //create DBHelper object
                 dbh.insertTask(etDescription.getText().toString(),
-                        etDate.getText().toString()); //call insertTask()
+                        etDate.getText().toString()); //call insertTask() to insert task
             }
         });
 
@@ -57,8 +57,9 @@ public class MainActivity extends AppCompatActivity {
                     Log.d("Database Content", i +". "+data.get(i));
                     text += i + ". "+ data.get(i) + "\n";
                 }
-
                 tvResults.setText(text);
+
+
                 if(asc) {
                     asc = false;
                 }

@@ -48,20 +48,24 @@ public class DBHelper extends SQLiteOpenHelper {
 
     public void insertTask(String description, String date) {
 
-        SQLiteDatabase db = this.getWritableDatabase(); //get editable data
+        SQLiteDatabase db = this.getWritableDatabase(); //get instance of db for editing data
 
-        ContentValues values = new ContentValues();
+        ContentValues values = new ContentValues(); //use ContentValues object to store values for the db operation
+
         values.put(COLUMN_DESCRIPTION, description);
         values.put(COLUMN_DATE, date);
-        db.insert(TABLE_TASK, null, values);
-        db.close();
+
+        db.insert(TABLE_TASK, null, values); //insert row into TABLE_TASK
+        db.close(); //close db connection
 
     }
 
     public ArrayList<String> getTaskContent() {
         ArrayList<String> tasks = new ArrayList<>(); //create Strings arrayList named tasks
+
         String selectQuery = "SELECT "+ COLUMN_DESCRIPTION + " FROM " + TABLE_TASK;
-        SQLiteDatabase db = this.getReadableDatabase();
+
+        SQLiteDatabase db = this.getReadableDatabase(); //get instance of database to read
         Cursor cursor = db.rawQuery(selectQuery, null); //cursor points to each row of data
 
         if(cursor.moveToFirst()) { //if got data in database
@@ -76,7 +80,7 @@ public class DBHelper extends SQLiteOpenHelper {
     }
 
     public ArrayList<Task> getTasks(boolean asc) { //true asc, false desc
-        ArrayList<Task> tasks = new ArrayList<>();
+        ArrayList<Task> tasks = new ArrayList<Task>();
         String sort = "";
         if(asc) {
             sort = " ASC";
